@@ -92,17 +92,14 @@ FROM products as p
 --	8.	What is the total available on-hand quantity of diet pepsi?
 SELECT DISTINCT
 	p.description,
-	COUNT(*)
+	sum(wp.on_hand)
 FROM products as p
 JOIN warehouse_product as wp on wp.product_id=p.id
 JOIN warehouse as w on w.id=wp.warehouse_id
 WHERE p.description = 'diet pepsi'
 AND wp.on_hand >= 0
 GROUP BY
-	p.description
-	
-	select * from warehouse_products as wp 
-	join products as p on wp.productid=p.id
-	where p.description='diet pepsi' 
+	p.description;
+
 
 
