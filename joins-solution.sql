@@ -59,25 +59,23 @@ SELECT DISTINCT
 	c.first_name,
 	c.last_name,
 	COUNT(*) 
-FROM line_items as l 
-JOIN orders as o on o.id=l.order_id
-JOIN addresses as a on a.id=o.address_id
-JOIN customers as c on c.id=a.customer_id
+FROM customers as c
+JOIN addresses as a on c.id=a.customer_id
+JOIN orders as o on o.address_id=a.id
 GROUP BY
 	c.first_name, 
-	c.last_name, 
-	l.order_id;
----------------------------
+	c.last_name;
+	
+--or--	
+
 SELECT DISTINCT	
 	c.id,
 	COUNT(*) 
-FROM line_items as l 
-JOIN orders as o on o.id=l.order_id
-JOIN addresses as a on a.id=o.address_id
-JOIN customers as c on c.id=a.customer_id
+FROM customers as c
+JOIN addresses as a on c.id=a.customer_id
+JOIN orders as o on o.address_id=a.id
 GROUP BY
-	c.id, 
-	l.order_id
+	c.id;
 
 
 --	6.	How many customers do we have?
@@ -99,7 +97,12 @@ FROM products as p
 JOIN warehouse_product as wp on wp.product_id=p.id
 JOIN warehouse as w on w.id=wp.warehouse_id
 WHERE p.description = 'diet pepsi'
+AND wp.on_hand >= 0
 GROUP BY
 	p.description
+	
+	select * from warehouse_products as wp 
+	join products as p on wp.productid=p.id
+	where p.description='diet pepsi' 
 
 
