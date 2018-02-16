@@ -66,6 +66,17 @@ JOIN customers as c on c.id=a.customer_id
 GROUP BY
 	c.first_name, 
 	c.last_name, 
+	l.order_id;
+---------------------------
+SELECT DISTINCT	
+	c.id,
+	COUNT(*) 
+FROM line_items as l 
+JOIN orders as o on o.id=l.order_id
+JOIN addresses as a on a.id=o.address_id
+JOIN customers as c on c.id=a.customer_id
+GROUP BY
+	c.id, 
 	l.order_id
 
 
