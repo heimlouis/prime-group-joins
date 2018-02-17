@@ -95,7 +95,7 @@ SELECT DISTINCT
 	sum(wp.on_hand)
 FROM products as p
 JOIN warehouse_product as wp on wp.product_id=p.id
-JOIN warehouse as w on w.id=wp.warehouse_id
+--JOIN warehouse as w on w.id=wp.warehouse_id --not sure what I was thinking here... its not needed.
 WHERE p.description = 'diet pepsi'
 AND wp.on_hand >= 0
 GROUP BY
